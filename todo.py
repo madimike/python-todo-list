@@ -1,35 +1,46 @@
-def todo_app():
-    tasks = []
+import tkinter as tk
+from tkinter import messagebox
 
-    print("Welcome to your Personal To-Do List!")
+def add_task():
+    task = task_entry.get()
+    if task != "":
+        task_listbox.insert(tk.END, task)
+        task_entry.delete(0, tk.END)
+    else:
+        messagebox.showwarning("Warning", "You must enter a task.")
 
-    while True:
-        print("\n--- MENU ---")
-        print("1. View Tasks")
-        print("2. Add a Task")
-        print("3. Exit")
+def delete_task():
+    try:
+        selected_task_index = task_listbox.curselection()[0]
+        task_listbox.delete(selected_task_index)
+    except IndexError:
+        messagebox.showwarning("Warning", "You must select a task to delete.")
 
-        choice = input("Choose an option (1, 2, or 3): ")
+# Create the main window
+root = tk.Tk()
+root.title("Python To-Do List App")
+root.geometry("400x450")
+root.config(bg="#f0f0f0")
 
-        if choice == "1":
-            if len(tasks) == 0:
-                print("Your list is currently empty!")
-            else:
-                print("\nYour Tasks:")
-                for i in range(len(tasks)):
-                    print(f"{i + 1}. {tasks[i]}")
+# Title Label
+title_label = tk.Label(root, text="My To-Do List", font=("Arial", 18, "bold"), bg="#f0f0f0", fg="#333")
+title_label.pack(pady=10)
 
-        elif choice == "2":
-            new_task = input("What task would you like to add? ")
-            tasks.append(new_task)
-            print(f"'{new_task}' has been added!")
+# Entry Box for typing tasks
+task_entry = tk.Entry(root, font=("Arial", 14), width=25)
+task_entry.pack(pady=10)
 
-        elif choice == "3":
-            print("Goodbye!")
-            break
+# Add Task Button
+add_button = tk.Button(root, text="Add Task", font=("Arial", 12), bg="#4CAF50", fg="white", width=15, command=add_task)
+add_button.pack(pady=5)
 
-        else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+# Listbox to display tasks
+task_listbox = tk.Listbox(root, font=("Arial", 12), width=30, height=12, selectbackground="#a6a6a6")
+task_listbox.pack(pady=10)
 
-if __name__ == "__main__":
-    todo_app()
+# Delete Task Button
+delete_button = tk.Button(root, text="Delete Task", font=("Arial", 12), bg="#f44336", fg="white", width=15, command=delete_task)
+delete_button.pack(pady=5)
+
+# Run the app window
+root.mainloop()

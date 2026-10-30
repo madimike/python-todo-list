@@ -1,14 +1,14 @@
-# Python To-Do List App
+# Python Desktop To-Do List App
 
-A simple, beginner-friendly command-line to-do list application built with Python.
+A graphical desktop to-do list application built with Python and Tkinter.
 
 ## Features
-- View your current task list
-- Add new tasks dynamically using lists and loops
-- Interactive menu using conditional statements and user input
+- Real desktop user interface window
+- Add tasks interactively with an input box and button
+- Delete completed tasks from the list
 
 ## How to Run
-1. Make sure you have Python 3 installed.
-2. Run the program in your terminal:
+1. Make sure you have Python 3 and Tkinter installed (`sudo apt install python3-tk`).
+2. Run the application:
    ```bash
    python3 todo.py
